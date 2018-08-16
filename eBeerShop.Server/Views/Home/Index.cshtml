@@ -1,0 +1,29 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using eBeerShop.Persistance.Identity
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<br />
+
+<div class="text-center">
+    <img src="https://rivertowntimes.com/wp-content/uploads/2014/05/Beer-Store-logo.jpg" class="rounded" alt="...">
+    <h1>WELCOME TO THE BEER STORE</h1>
+</div>
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <div class="text-center">
+        <h3>User: @UserManager.GetUserName(User)</h3>
+    </div>
+    @Html.ActionLink("Manage Orders", "Index", "Order", null, new { @class = "btn btn-success btn-lg btn-block" })
+    @Html.ActionLink("Shop Now!", "Index", "Shop", null, new { @class = "btn btn-primary btn-lg btn-block" })
+}
+else
+{
+    @Html.ActionLink("Login", "Index", "Login", null, new { @class = "btn btn-primary btn-lg btn-block" })
+}
